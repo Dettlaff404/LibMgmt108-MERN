@@ -1,11 +1,11 @@
-const http = require('http');
-const PORT = 3500;
+const express = require('express');
+const app = express();
+const PORT = 3600;
 
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Hello MERN for CMJD - 108');
+app.get('/', (req, res) => {
+    res.send('Hello CMJD - 108');
 });
 
-server.listen(PORT, () => {
-    console.log(`Server is running on PORT ${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

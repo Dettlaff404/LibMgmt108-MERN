@@ -1,10 +1,9 @@
 const express = require('express');
 const app = express();
 const PORT = 3600;
+const bookRoute = require('./routes/BookRoute');
 
-app.get('/', (req, res) => {
-    res.send('Hello CMJD - 108');
-});
+app.use('/api/v1',bookRoute )
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

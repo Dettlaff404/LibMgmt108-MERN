@@ -5,7 +5,8 @@ const bookRoutes = require("./routes/BookRoute");
 const memberRoutes = require("./routes/MemberRoute");
 const mongoose = require("mongoose");
 
-
+app.use(express.json());
+app.use("/api/v1",bookRoutes);
 app.use("/api/v1",memberRoutes);
 
 //DB Integrate

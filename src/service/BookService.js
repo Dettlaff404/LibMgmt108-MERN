@@ -11,7 +11,7 @@ async function addBook(book) {
 }
 
 async function deleteBook(bookId) {
-    return Book.findByIdAndDelete(bookId);
+    return Book.findAndDelete(bookId);
 }
 
 async function updateBook(bookId, book) {

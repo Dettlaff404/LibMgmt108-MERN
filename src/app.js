@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
-const PORT = 3700;
+const PORT = process.env.PORT || 3700;
 const bookRoutes = require("./routes/BookRoute");
 const memberRoutes = require("./routes/MemberRoute");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const authRoutes = require("./routes/AuthRoute");
 
 //MiddleWares
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use(cors({
 //----------------------
 app.use("/api/v1",bookRoutes);
 app.use("/api/v1",memberRoutes);
+app.use("/api/v1",authRoutes);
 
 //DB Integrate
 mongoose.connect("mongodb://localhost:27017/bookLib109",{useNewUrlParser: true, useUnifiedTopology: true})

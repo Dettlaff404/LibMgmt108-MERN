@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 const User = require("../model/UserModel");
-const addUser = require("../service/UserService");
+const {addUser} = require("../service/UserService");
 
 const authURL = "/auth";
 const jwtSecret = process.env.JWT_SECRET;
@@ -32,7 +32,7 @@ router.post(`${authURL}/signin`, async (req, res) => {
         }
 
         //Token Generation
-        const token = jwt.sign({ id: user._id }, jwtSecret, {
+        const token = jwt.sign({ id: user.email }, jwtSecret, {
             expiresIn: "1h"
         });
 
@@ -45,3 +45,28 @@ router.post(`${authURL}/signin`, async (req, res) => {
 })
 
 //Register - SignUp
+router.post(`${authURL}/signup`, async (req, res) => {
+    const { firstName, lastName, email, password, role } = req.body;
+
+    if (!firstName || !lastName || !email || !password || !role) {
+        return res.status(401).json({ error: "Missing required fields" });
+    }
+
+    try {
+        //Create User
+        const user = await addUser(req.body);
+
+        //Token Generation
+        const token = jwt.sign({ id: user.email }, jwtSecret, {
+            expiresIn: "1h"
+        });
+
+        res.status(201).json({ message : "User registered successfully", token });
+        
+    } catch (error) {
+        console.error("Register error:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+})
+
+module.exports = router;

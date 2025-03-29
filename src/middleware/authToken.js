@@ -3,7 +3,7 @@ require("dotenv").config();
 const jwtSecret = process.env.JWT_SECRET;
 
 const authToken = (req, res, next) => {
-    const token = req.headers("Authorization") && req.headers("Authorization").replace("Bearer ", "");
+    const token = req.header("Authorization") && req.header("Authorization").replace("Bearer ", "");
     console.log(token);
 
     if (!token) {

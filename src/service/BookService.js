@@ -15,6 +15,8 @@ async function deleteBook(bookId) {
 }
 
 async function updateBook(bookId, book) {
+    book.lastUpdateDate = new Date().toISOString().split("T")[0];
+    book.lastUpdateTime = new Date().toTimeString().split(" ")[0];
     return Book.findOneAndUpdate({ bookId: bookId }, book,{ new: true });
 }
 

@@ -40,4 +40,18 @@ router.delete(`${bookURL}/:id`, async (req, res) => {
     }
 });
 
+//Update Book
+router.patch(`${bookURL}/:id`, async (req, res) => {
+    try {
+        const updatedBook = await bookService.updateBook(req.params.id, req.body);
+        if (!updatedBook) {
+            return res.status(404).send("Book not found for update");
+        }
+        return res.status(204).send();
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 module.exports = router; 

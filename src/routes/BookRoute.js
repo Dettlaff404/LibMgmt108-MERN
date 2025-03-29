@@ -1,16 +1,17 @@
-//Handle book routes / reqs
-const bookURL = "/books";
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const BookService = require('../service/BookService');
+const bookService = require("../service/BookService");
+
+const bookURL = "/books";
 
 router.get(bookURL, async (req, res) => {
     try {
-        const getAllBooks = await BookService.getAllBooks();
-    console.log("Get All Books from the service layer......");
+        const getAllBooks = await bookService.getAllBooks();
+        console.log("Get All books from service layer............");
+        res.json(getAllBooks); 
     } catch (error) {
         res.status(500).json({ error: "Error fetching books" });
     }
-})
+});
 
-module.exports = router;
+module.exports = router; 

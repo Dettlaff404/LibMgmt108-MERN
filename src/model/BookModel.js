@@ -10,7 +10,7 @@ const bookSchema = new mongoose.Schema({
     isbn: { type: String, required: true },
     price: { type: Number, required: true },
     totalQty: { type: Number, default: 0 },
-    avilableQty: { type: Number, default: 0 },
+    availableQty: { type: Number, default: 0 },
     lastUpdateDate: { type: String, default: () => new Date().toISOString().split("T")[0] },
     lastUpdateTime: { type: String, default: () => new Date().toTimeString().split(" ")[0] }
 });

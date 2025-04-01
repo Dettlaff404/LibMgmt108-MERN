@@ -32,8 +32,21 @@ router.get(staffURL, authToken, async (req, res) => {
 //Create Staff Member
 router.post(staffURL, authToken, async (req, res) => {
     try {
-        await staffService.addStaffMember(req.body);
-        return res.status(201).send("Staff member added successfully");
+        const createdStaffMember = await staffService.addStaffMember(req.body);
+
+        const filteredstaffMember = {
+            staffId: createdStaffMember.staffId,
+            firstName: createdStaffMember.firstName,
+            lastName: createdStaffMember.lastName,
+            email: createdStaffMember.email,
+            joinDate: createdStaffMember.joinDate,
+            lastUpdateDate: createdStaffMember.lastUpdateDate,
+            lastUpdateTime: createdStaffMember.lastUpdateTime,
+            phone : createdStaffMember.phone,
+            role : createdStaffMember.role
+        };
+
+        return res.status(201).json(filteredstaffMember);
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");

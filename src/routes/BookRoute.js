@@ -34,8 +34,24 @@ router.get(bookURL, authToken, async (req, res) => {
 //Create Book
 router.post(bookURL, authToken, async (req, res) => {
     try {
-        await bookService.addBook(req.body);
-        return res.status(201).send("Book added successfully");
+        const createdBook = await bookService.addBook(req.body);
+
+        const filteredBook = {
+            bookId: createdBook.bookId,
+            bookName: createdBook.bookName,
+            author: createdBook.author,
+            edition: createdBook.edition,
+            publisher: createdBook.publisher,
+            isbn: createdBook.isbn,
+            price: createdBook.price,
+            totalQty: createdBook.totalQty,
+            availableQty: createdBook.availableQty,
+            lastUpdateDate: createdBook.lastUpdateDate,
+            lastUpdateTime: createdBook.lastUpdateTime
+        };
+        
+        return res.status(201).json(filteredBook);
+
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");

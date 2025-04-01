@@ -27,8 +27,16 @@ router.get(memberURL, authToken, async (req, res) => {
 //Create Member
 router.post(memberURL, authToken, async (req, res) => {
     try {
-        await memberService.addMember(req.body);
-        return res.status(201).send("Member added successfully");
+        const createdMember = await memberService.addMember(req.body);
+
+        const filteredMember = {
+            memberId: createdMember.memberId,
+            name: createdMember.name,
+            email: createdMember.email,
+            membershipDate: createdMember.membershipDate
+        }
+
+        return res.status(201).json(filteredMember);
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");

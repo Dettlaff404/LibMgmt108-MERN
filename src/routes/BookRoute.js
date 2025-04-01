@@ -6,7 +6,7 @@ const authToken = require("../middleware/authToken");
 const bookURL = "/books";
 
 //Get All Books
-router.get(bookURL,authToken, async (req, res) => {
+router.get(bookURL, authToken, async (req, res) => {
     try {
         const allBooks = await bookService.getAllBooks();
 
@@ -32,7 +32,7 @@ router.get(bookURL,authToken, async (req, res) => {
 });
 
 //Create Book
-router.post(bookURL, async (req, res) => {
+router.post(bookURL, authToken, async (req, res) => {
     try {
         await bookService.addBook(req.body);
         return res.status(201).send("Book added successfully");
@@ -43,7 +43,7 @@ router.post(bookURL, async (req, res) => {
 });
 
 //Delete Book
-router.delete(`${bookURL}/:id`, async (req, res) => {
+router.delete(`${bookURL}/:id`, authToken, async (req, res) => {
     try {
         const delBook = await bookService.deleteBook(req.params.id);
         if (!delBook) {
@@ -57,7 +57,7 @@ router.delete(`${bookURL}/:id`, async (req, res) => {
 });
 
 //Update Book
-router.patch(`${bookURL}/:id`, async (req, res) => {
+router.patch(`${bookURL}/:id`, authToken, async (req, res) => {
     try {
         const updatedBook = await bookService.updateBook(req.params.id, req.body);
         if (!updatedBook) {

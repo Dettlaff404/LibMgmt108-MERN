@@ -1,19 +1,21 @@
-//CRUD for Book data handling
+//CRUD for Member data handling
+const Member = require("../model/MemberModel");
 
 async function getAllMembers() {
-    console.log("getAllMembers");
+    return Member.find();
 }
 
-async function addMember() {
-    console.log("addMember");
+async function addMember(member) {
+    const memberData = new Member(member);
+    return memberData.save();
 }
 
-async function deleteMember() {
-    console.log("deleteMember");
+async function deleteMember(memberId) {
+    return Member.findOneAndDelete({ memberId: memberId });
 }
 
-async function updateMember() {
-    console.log("updateMember");
+async function updateMember(memberId, member) {
+    return Member.findOneAndUpdate({ memberId: memberId }, member, { new: true });
 }
 
 module.exports = { getAllMembers, addMember, deleteMember, updateMember }

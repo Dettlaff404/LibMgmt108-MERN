@@ -11,13 +11,13 @@ async function addBook(book) {
 }
 
 async function deleteBook(bookId) {
-    return Book.findOneAndDelete(bookId);
+    return Book.findOneAndDelete({ bookId });
 }
 
 async function updateBook(bookId, book) {
     book.lastUpdateDate = new Date().toISOString().split("T")[0];
     book.lastUpdateTime = new Date().toTimeString().split(" ")[0];
-    return Book.findOneAndUpdate({ bookId: bookId }, book,{ new: true });
+    return Book.findOneAndUpdate({ bookId: bookId }, book, { new: true });
 }
 
 module.exports = { getAllBooks, addBook, deleteBook, updateBook }

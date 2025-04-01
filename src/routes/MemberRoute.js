@@ -17,6 +17,7 @@ router.get(memberURL, authToken, async (req, res) => {
             membershipDate: member.membershipDate
         }));
 
+        console.log("Get All Members ", filterMembers);
         res.json(filterMembers);
     } catch (error) {
         res.status(500).json({ error: "Error fetching members" });

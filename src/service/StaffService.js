@@ -1,19 +1,21 @@
-//CRUD for Book data handling
+//CRUD for Staff data handling
+const Staff = require("../model/StaffModel");
 
-async function getAllStaff() {
-    console.log("getAllStaff");
+async function getAllStaffMembers() {
+    return Staff.find();
 }
 
-async function addStaffMember() {
-    console.log("addStaffMember");
+async function addStaffMember(staff) {
+    const staffData = new Staff(staff);
+    return staffData.save();
 }
 
-async function deleteStaffMember() {
-    console.log("deleteStaffMember");
+async function deleteStaffMember(staffId) {
+    return Staff.findOneAndDelete({ staffId: staffId });
 }
 
-async function updateStaffMember() {
-    console.log("updateStaffMember");
+async function updateStaffMember(staffId, staff) {
+    return Staff.findOneAndUpdate({ staffId: staffId }, staff, { new: true });
 }
 
-module.exports = { getAllStaff, addStaffMember, deleteStaffMember, updateStaffMember }
+module.exports = { getAllStaffMembers, addStaffMember, deleteStaffMember, updateStaffMember }

@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3700;
 const bookRoutes = require("./routes/BookRoute");
 const memberRoutes = require("./routes/MemberRoute");
 const staffRoutes = require("./routes/StaffRoute");
+const lendingRoutes = require("./routes/LendingRoute");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/AuthRoute");
@@ -22,6 +23,7 @@ app.use("/api/v1",authRoutes);
 app.use("/api/v1",bookRoutes);
 app.use("/api/v1",memberRoutes);
 app.use("/api/v1",staffRoutes);
+app.use("/api/v1",lendingRoutes);
 
 //DB Integrate
 mongoose.connect("mongodb://localhost:27017/bookLib109",{useNewUrlParser: true, useUnifiedTopology: true})
